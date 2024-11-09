@@ -1,0 +1,24 @@
+{% extends 'health_wallet/base.html' %}
+{% load static %}  
+
+{% block title %}Register - Health Wallet{% endblock %}
+{% block navbar_links %}
+    <a href="{% url 'home' %}" class="text-white px-3">Home</a>
+    <a href="{% url 'login' %}" class="text-white px-3">Login</a>
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'health_wallet/css/form_styles.css' %}">
+
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-900">
+    <div class="max-w-md w-full bg-gray-800 p-8 shadow-lg rounded-lg">
+        <h2 class="text-3xl font-bold text-center mb-6 text-white animate__animated animate__fadeIn">Register</h2>
+        <form method="post" class="animate__animated animate__fadeInUp space-y-6">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="mt-4">
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

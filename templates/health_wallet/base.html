@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Health Data Exchange{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #121212; /* Dark background for a modern look */
+            color: #a0e1db; /* Softer neon teal color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make body take full height */
+        }
+        
+        nav {
+            background-color: #1e1e2f; /* Slightly darker for contrast */
+        }
+
+        a {
+            color: #a0e1db;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        a:hover {
+            color: #121212; /* Dark text for links on hover */
+            background-color: #a0e1db; /* Neon button background */
+        }
+
+        footer {
+            background-color: #1e1e2f; /* Match the navbar */
+            color: #a0e1db; /* Consistent text color */
+            padding: 10px 0;
+            margin-top: auto; /* Push footer to bottom */
+            text-align: center; /* Center footer text */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <!-- Navbar -->
+    <nav class="p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'dashboard' %}" class="text-white font-bold text-xl">Health Data Exchange</a>
+            <div>
+                {% block navbar_links %}
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-white px-3">Logout</a>
+                <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mx-auto py-8 flex-grow"> <!-- Added flex-grow here -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Health Data Exchange Platform. All rights reserved.
+    </footer>
+
+</body>
+</html>

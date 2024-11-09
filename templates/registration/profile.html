@@ -1,0 +1,76 @@
+{% extends "health_wallet/base.html" %}
+{% block navbar_links %}
+    <a href="{% url 'logout' %}" class="text-white px-3">Logout</a>
+{% endblock %}
+{% block content %}
+<style>
+    body {
+        background-color: #121212; /* Dark background for a modern look */
+        color: #a0e1db; /* Softer neon teal color */
+        margin: 0;
+        padding: 0;
+    }
+
+    .profile-container {
+        background-color: #2d2d2d; /* Darker background for the profile card */
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+        transition: transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+    }
+
+    .profile-container:hover {
+        transform: translateY(-2px); /* Subtle lift on hover */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+    }
+
+    h2 {
+        color: #ffffff; /* White text for heading */
+        text-align: center; /* Centering heading */
+        margin-bottom: 1.5rem; /* Spacing below heading */
+    }
+
+    p {
+        margin: 0.5rem 0; /* Spacing between paragraphs */
+        font-size: 1.1rem; /* Slightly larger font size */
+        color: #e0e0e0; /* Light gray for body text */
+    }
+
+    .dashboard-button {
+        display: inline-block;
+        margin-top: 1rem; /* Margin above button */
+        color: #121212; /* Dark text for button */
+        background-color: #a0e1db; /* Neon button background */
+        padding: 10px 20px; /* Button padding */
+        border-radius: 5px; /* Rounded corners */
+        border: 2px solid #a0e1db; /* Subtle border */
+        text-decoration: none; /* No underline */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Transition effects */
+        animation: slideIn 2s ease-out forwards; /* Animation */
+    }
+
+    .dashboard-button:hover {
+        background-color: #121212; /* Dark button background on hover */
+        color: #a0e1db; /* Neon text color on hover */
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<div class="max-w-md mx-auto profile-container">
+    <h2>Your Profile</h2>
+    <p>Ethereum Address: {{ user.ethereum_address }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <a href="{% url 'dashboard' %}" class="dashboard-button">Go to Dashboard</a>
+</div>
+{% endblock %}

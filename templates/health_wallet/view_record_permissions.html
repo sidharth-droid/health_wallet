@@ -1,0 +1,29 @@
+{% extends "health_wallet/base.html" %}  <!-- Assuming 'base.html' is your main layout file -->
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="text-center">Permissions for Record ID {{ record_id }}</h1>
+
+    <div class="card shadow-sm border-0 rounded mt-3">
+        <div class="card-body">
+            {% if permissions %}
+                <ul class="list-group list-group-flush">
+                    {% for permission in permissions %}
+                        <li class="list-group-item">Can View: <span class="text-primary">{{ permission.canView|yesno:"Yes,No" }}</span></li>
+                        <li class="list-group-item">Can Edit: <span class="text-primary">{{ permission.canEdit|yesno:"Yes,No" }}</span></li>
+                        <li class="list-group-item">Can Delete: <span class="text-primary">{{ permission.canDelete|yesno:"Yes,No" }}</span></li>
+                        <li class="list-group-item">Permanent Access: <span class="text-primary">{{ permission.isPermanent|yesno:"Yes,No" }}</span></li>
+                        <li class="list-group-item">Expiry Time: <span class="text-muted">{{ permission.expiryTime|date:"Y-m-d H:i" }}</span></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No permissions found for this record.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'view_medical_history' %}" class="btn btn-outline-secondary">Back to Medical History</a>
+    </div>
+</div>
+{% endblock %}

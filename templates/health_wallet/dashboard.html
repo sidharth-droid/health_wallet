@@ -1,0 +1,86 @@
+{% extends 'health_wallet/base.html' %}
+
+{% block navbar_links %}
+    <a href="{% url 'profile' %}" class="text-white px-3">Profile</a>
+    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-white px-3">Logout</a>
+    <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+        {% csrf_token %}
+    </form>
+{% endblock %}
+
+{% block content %}
+<div class="bg-gray-900 min-h-screen p-6">
+    <h1 class="text-3xl font-bold text-white mb-6 text-center">Dashboard</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Quick Links Card -->
+        <div class="bg-gray-800 shadow-lg rounded-lg p-6 hover:bg-gray-700 transition duration-300">
+            <h2 class="text-xl font-bold text-white mb-4">Quick Links</h2>
+            <ul class="space-y-2">
+                <li>
+                    <a href="{% url 'add_medical_history' %}" class="text-blue-400 hover:underline flex items-center">
+                        <i class="fas fa-plus-circle mr-2 text-green-400"></i> Add Medical History
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'view_medical_history' %}" class="text-blue-400 hover:underline flex items-center">
+                        <i class="fas fa-eye mr-2 text-yellow-400"></i> View Medical History
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'prescription_list' %}" class="text-blue-400 hover:underline flex items-center">
+                        <i class="fas fa-file-prescription mr-2 text-red-400"></i> View Prescriptions
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'add_prescription' %}" class="text-blue-400 hover:underline flex items-center">
+                        <i class="fas fa-prescription-bottle-alt mr-2 text-purple-400"></i> Add Prescription
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Health Records Summary -->
+        <div class="bg-gray-800 shadow-lg rounded-lg p-6 hover:bg-gray-700 transition duration-300">
+            <h2 class="text-xl font-bold text-white mb-4">Health Records Summary</h2>
+            <p class="text-gray-300">Total Medical Records: <span class="font-bold text-blue-400">{{ medical_records_count }}</span></p>
+            <p class="text-gray-300">Total Prescriptions: <span class="font-bold text-blue-400">{{ prescriptions_count }}</span></p>
+        </div>
+
+        <!-- Notifications -->
+        <div class="bg-gray-800 shadow-lg rounded-lg p-6 hover:bg-gray-700 transition duration-300">
+            <h2 class="text-xl font-bold text-white mb-4">Notifications</h2>
+            <p class="text-gray-300">No new notifications.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Internal CSS for dashboard styling */
+    h1 {
+        text-shadow: 0 0 10px rgba(160, 225, 219, 0.8); /* Glowing effect for the title */
+    }
+
+    .bg-gray-900 {
+        background-color: #1c1c1c; /* Slightly darker background for the entire dashboard */
+    }
+
+    .bg-gray-800 {
+        background-color: #2e2e2e; /* Darker cards for a subtle contrast */
+    }
+
+    .hover\:bg-gray-700:hover {
+        background-color: #4a4a4a; /* Slightly lighter gray on hover */
+    }
+
+    /* Add transitions to links for smoother hover effects */
+    a {
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #fff; /* Change text color on hover */
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}

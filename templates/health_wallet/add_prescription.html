@@ -1,0 +1,101 @@
+{% extends 'health_wallet/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #121212; /* Dark background for a modern look */
+        color: #a0e1db; /* Softer neon teal color */
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+        background-color: #2d2d2d; /* Darker background for the form card */
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+        transition: transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+    }
+
+    .form-container:hover {
+        transform: translateY(-2px); /* Subtle lift on hover */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+    }
+
+    h2 {
+        color: #ffffff; /* White text for heading */
+        text-align: center; /* Centering heading */
+        margin-bottom: 1.5rem; /* Spacing below heading */
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem; /* Spacing between form elements */
+    }
+
+    .form-group label {
+        display: block;
+        color: #e0e0e0; /* Light gray for label text */
+        margin-bottom: 0.5rem; /* Space below label */
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.45rem;
+        border: 1px solid #444; /* Border for inputs */
+        border-radius: 1rem; /* Slightly rounded corners */
+        background-color: #1f1f1f; /* Dark input background */
+        color: #a0e1db; /* Input text color */
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #7a7a7a; /* Placeholder text color */
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #a0e1db; /* Border color on focus */
+        outline: none; /* Remove default outline */
+    }
+
+    /* Specific styles for the textarea to make it smaller */
+    .form-group textarea {
+        height: 100px; /* Set a specific height for the textarea */
+    }
+
+    .submit-button {
+        display: inline-block;
+        width: 100%;
+        background-color: #a0e1db; /* Neon button background */
+        color: #121212; /* Dark text for button */
+        padding: 10px 20px; /* Button padding */
+        border-radius: 5px; /* Rounded corners */
+        border: none; /* No border */
+        text-decoration: none; /* No underline */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Transition effects */
+        font-size: 1.1rem; /* Slightly larger font size */
+    }
+
+    .submit-button:hover {
+        background-color: #121212; /* Dark button background on hover */
+        color: #a0e1db; /* Neon text color on hover */
+    }
+</style>
+
+<div class="max-w-lg mx-auto form-container">
+    <h2>Add Prescription</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }} <!-- Render the field directly -->
+        </div>
+        {% endfor %}
+        <button type="submit" class="submit-button">Save</button>
+    </form>
+</div>
+{% endblock %}
